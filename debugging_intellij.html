@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Simple Sidebar - Start Bootstrap Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="index.html">
+                        Java FX Tutorial
+                    </a>
+                </li>
+                 <li>
+                    <a href="installing_intellij.html">Installing IntelliJ</a>
+                </li>
+                <li>
+                    <a href="hello_world.html">Hello World</a>
+                </li>
+                <li>
+                    <a href="debugging_intellij.html">Debugging with Intellij</a>
+                </li>
+                <li>
+                    <a href="windows.html">Windows</a>
+                </li>
+                <li>
+                    <a href="layouts.html">Layouts</a>
+                </li>
+                <li>
+                    <a href="textfields_inputs.html">TextFields/Inputs</a>
+                </li>
+                <li>
+                    <a href="images.html">Images</a>
+                </li>
+                <li>
+                    <a href="event_handling.html">Event Handling</a>
+                </li>
+                <li>
+                    <a href="other.html">Other Information</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!--<p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>-
+                        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>-->
+
+                        <h1>Debugging with IntelliJ</h1>
+                        <h2>Breakpoints</h2>
+                        <p>Breakpoints are used in order to stall a running program at selected areas within the code.  Once the code is stopped, users can examine how the code is running based on current values of variables and where we are in the stack.</p>
+                        <h3>Creating Breakpoints</h3>
+                        <p>In order to set a breakpoint, click on the light gray column to the left of the line in the code where a breakpoint is desired.  After this has been done the line should be highlighted in red and marked with a red circle as shown below:</p>
+                        <img src="images/settingbreakpoint1.png" alt="Creating a Breakpoint Before" align="middle">
+                        <img src="images/settingbreakpoint2.png" alt="Creating a Breakpoint After" align="middle">
+                        <h2>Using Breakpoints</h2>
+                            <p>Breakpoints can be set on any line of code, this includes method names. Breakpoints on method names will temporarily stop the program from running any time that method is called.  This breakpoint's appearance is different from a breakpoint on a line, which would lack the 4 black dots.</p>
+                        <h3>Properties of Breakpoints</h3>
+                            <p>If you right click the breakpoint marker you can access the breakpoint properties.</p>
+                            <img src="images/breakpointProperties.png" alt="Breakpoint Properties">
+
+                            <p>The condition text field allows for the breakpoint to only be activated given a specific condition.  For instance, suppose we wanted to have a breakpoint activated within a for loop on every odd iteration.  This could be implemented by entering the following as the condition.</p>
+                            <img src="images/breakpointCondition.png" alt="Breakpoint Conditions">
+                            <p>Each time the value of i modulo 2 is equal to 1 the breakpoint is activated. Therefore the program will halt when i is 1 or 3.</p>
+                            <p>Any variables used within the condition should be within the method that contains the breakpoint, otherwise an error will pop up which will allow you to either halt or skip the said breakpoint.</p>
+
+                        <h2>Debugging with Breakpoints</h2>
+                        <p>Once we have the desired breakpoints selected, we will go to the toolbar and under Run we will be given two options, Run and Debug.  Selecting the Debug option will make it so IntelliJ will run our program and halt at breakpoints.</p>
+                        <p>Upon reaching a breakpoint, IntelliJ will show us two subwindows, Variables and Frames.  Variables shows us the values of the variables within that method whereas Frames gives us a glimpse of the stack frame.  In layman's terms, the stack frame shows the currently running methods.  If we are in some method A( ) then this method will be on the top of the stack.  Once A( ) calls another method, say B( ), then B( ) is pushed on top of the stack.  When B( ) is complete, it is popped off the stack and and then A( ) will continue running.</p>
+                        <p>In order to show the behavior of the stack frame, the below example shows the stackframe towards the end of a program that calls a method first( ) which will then call a recursive method factorial(3).</p>
+                        <img src="images/stackFrame.png" alt="Stack Frame">
+                        <p>We see three things within each line, the method name, which line the method occurs at, and which class the method is from.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+</body>
+
+</html>
