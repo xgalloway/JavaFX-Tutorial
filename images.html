@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Images</title>
+    <title>Java FX Images</title>
     <link rel="shortcut icon" type="image/png" href="images/intellij_icon.png" />
 
     <!-- Bootstrap Core CSS -->
@@ -24,6 +24,10 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <link rel="stylesheet" href="highlight/styles/default.css">
+    <script src="highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 
 </head>
 
@@ -89,10 +93,131 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1>Images</h1>
-                        <!--<p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
-                        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p> -->
-                        
+                        <h1>Java FX Images</h1>
+                        <p>This section demonstrates how to create a simple application using Scene Builder to create an ImageView. For more information on ImageViews or Images check out the <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/image/ImageView.html" target="_blank">ImageView Oracle Documentation</a>. </p>
+                        <h2>Create ImageView in Scene Builder</h2>
+                        <p>First, create a new project, or in your current project right click on the FXML file and click "Open in Scene Builder". For specific Scene Builder questions refer to the <a href="scene_builder.html">Scene Builder</a> section of the tutorial. </p>
+                        <p>In the FXML file in Scene Builder, on the left side under "Controls" drag an ImageView into the Pane. Scene Builder allows you to easily resize and format the ImageView in the way you want. On the right side in the Inspector, you can choose the Image you want to load in the ImageView. Make sure the image is in your project directory (/project_name/src/sample/image.jpg), because some problems can occur when you load an image from elsewhere, including the image just not showing up at all. Below is an example of an ImageView in Scene Builder. </p>
+
+                        <img src="images/images_1.png" alt="Create ImageView">
+
+                        <p></p>
+                        <p>Hard coding an image path is ok for static images that will never change, but it is good practice to do the setting in the controller class instead of in the FXML. On the bottom left "Controller" Tab in Scene Builder, choose the corresponding controller class as seen below. </p>
+
+                        <img src="images/images_2.png" alt="Select Controller">
+
+                        <p></p>
+                        <h2>Create ImageView in FXML</h2>
+                        <p>The FXML should be created and modified in Scene Builder, but if you want to modify the FXML directly you can. The ImageView created in FXML should look something like this, with an Image inside of an ImageView, inside of a Pane: </p>
+
+<pre><code class="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;?import javafx.scene.control.*?&gt;
+&lt;?import javafx.scene.image.*?&gt;
+&lt;?import java.lang.*?&gt;
+&lt;?import javafx.scene.layout.*?&gt;
+&lt;?import javafx.geometry.Insets?&gt;
+&lt;?import javafx.scene.layout.GridPane?&gt;
+&lt;?import javafx.scene.control.Button?&gt;
+&lt;?import javafx.scene.control.Label?&gt;
+
+&lt;AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="243.0" prefWidth="234.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller"&gt;
+   &lt;children&gt;
+      &lt;VBox prefHeight="175.0" prefWidth="164.0"&gt;
+         &lt;children&gt;
+            &lt;ImageView fx:id="imageView" fitHeight="243.0" fitWidth="231.0" pickOnBounds="true" preserveRatio="true"&gt;
+               &lt;image&gt;
+                  &lt;Image url="@spongebob.jpeg" /&gt;
+               &lt;/image&gt;
+            &lt;/ImageView&gt;
+         &lt;/children&gt;
+      &lt;/VBox&gt;
+   &lt;/children&gt;
+&lt;/AnchorPane&gt;
+</code></pre>
+
+						<h2>Modify Image Through Code</h2>
+						<p>In Main.java, load the FXML and Controller: </p>
+<pre><code class="java">package sample;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+
+    private Stage primaryStage;
+
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        this.primaryStage = primaryStage;
+        this.primaryStage.setTitle("Images Example App");
+
+        try {
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/sample/sample.fxml"));
+            AnchorPane layout = (AnchorPane) loader.load();
+
+            Controller controller = loader.getController();
+            controller.setMain(this);
+
+            Scene scene = new Scene(layout);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+
+</code></pre>
+						<p>And finally, in the Controller class create a reference to the ImageView: </p>
+
+<pre><code class="java">package sample;
+
+import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
+
+public class Controller {
+    @FXML
+    ImageView imageView;
+
+    Main main;
+
+    public void setMain(Main main) {
+        this.main = main;
+    }
+}
+</code></pre>
+						<p>With this reference to the ImageView, we can modify the image however we want. With the regular image: </p>
+						<img src="images/images_3.png" alt="Initial app">
+						<p></p>
+						<p>To use a different image in code, set the Image of the ImageView to something else. The Image object can take in a place in the current directory, or also an image online. </p>
+<pre><code class="java">public void setMain(Main main) {
+    this.main = main;
+    Image image = new Image("http://i.imgur.com/xkJgXtK.jpg");
+    imageView.setImage(image);
+}
+</code></pre>
+						<img src="images/images_4.png" alt="Internet image">
+						<p></p>
+						<p>Similarly, you can rotate the image by calling the .setRotate method:</p>
+<pre><code class="java">public void setMain(Main main) {
+    this.main = main;
+    Image image = new Image("http://i.imgur.com/xkJgXtK.jpg");
+    imageView.setImage(image);
+    imageView.setRotate(90);
+}
+</code></pre>
+						<img src="images/images_5.png" alt="Rotated image">
+						<p></p>
+						<p>Look at the Oracle documentation for more information about what can be done with <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/image/ImageView.html" target="_blank">ImageViews</a> or <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/image/Image.html" target="_blank">Images</a>. </p>
                     </div>
                 </div>
             </div>
