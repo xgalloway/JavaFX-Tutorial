@@ -25,6 +25,10 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <link rel="stylesheet" href="highlight/styles/default.css">
+    <script src="highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
 </head>
 
 <body>
@@ -90,10 +94,370 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1>Java FX Tutorial</h1>
-                        <!--<p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
-                        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p> -->
-                        <p>Hello! Welcome to the JavaFX tutorial for CS2340 students. In this tutorial we will go over installation of the IDE IntelliJ as well as the basics of JavaFX to help you all get started on your projects. This tutorial includes a java application that is built alongside the material in order to help solidify the topics. The tutorial is also built to allow for easy reference for any topic needed.</p>
-                        <p>The sample todo list that is referenced throughout the tutorial can be found on Github <a href ="https://github.com/xgalloway/TooToDo-master" target="_blank">here</a>.</p>
+                        
+<h2>LoginController.java </h2>
+
+<p>
+Now, let's create the controller classes so that we can connect the view files to the model files. Create a new package and let's call it "Controller."
+</p>
+
+<p>
+<img src="images/controller_new-package.png" alt="Controller New Package">
+
+<img src="images/controller_new-package-2.png" alt="New Package Name">
+</p>
+
+<p>Now that we have created a new package, create a new file Java called LoginController. Copy and paste the following code in the file:</p>
+
+<pre><code class="java">package TooToDoApp.Controller;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+    import javafx.scene.control.PasswordField;
+    import javafx.scene.control.TextField;
+
+    public class LoginController {
+        @FXML
+        private TextField loginTextField;
+        @FXML
+        private PasswordField passwordField;
+        @FXML
+        private Label loginFailed;
+
+        private TooToDoMain main;
+
+    public LoginController() {}
+
+    /**
+     * Handles Login Button
+     */
+    @FXML
+    private void handleLoginButton() {
+        String login = loginTextField.getText();
+        String password = passwordField.getText();
+        int index = main.getContainer().userIndex(login);
+        if (index == -1) {
+            loginFailed.setText("Login Failed");
+        } else if (main.getContainer().passwordMatch(index, password)) {
+            main.getContainer().setCurrentUser(main.getContainer().getUsers().get(index));
+            main.showToDoList();
+        }
+    }
+
+    /**
+     * Handles Register Button
+     */
+    @FXML
+    private void handleRegisterButton() {
+        main.showRegistration();
+    }
+
+    /**
+     * @param main, setter for main
+     */
+    public void setMain(TooToDoMain main) {
+        this.main = main;
+    }
+
+}</code></pre>
+
+<p>
+The @FXML annotations are important because the properties are private. Without the @FXML annotations, we cannot reference them to the corresponding FXML files. 
+</p>
+<p>
+The method handleLoginButton is the same name that we used for the onAction tag in the login.fxml file. 
+
+When the button is clicked, the controller will tell it what to do based on whether the login credentials are correct or not. Note that this method also has the @FXML annotation because it is referenced in the Login.fxml file. 
+</p>
+
+<h2>RegistrationController.java </h2>
+
+<p>Now, let's create a controller java file that will control what happens when the register button is clicked. Create a new file under the package Controller and let's call it RegistrationController. Copy and paste the following code in the file:</p>
+
+<pre><code class="java">package TooToDoApp.Controller;
+
+import TooToDoApp.Model.User;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+
+public class RegistrationController {
+    @FXML
+    private TextField usernameField;
+    @FXML
+    private PasswordField passwordField;
+    @FXML
+    private PasswordField retypePasswordField;
+    @FXML
+    private Label incorrectRegister;
+
+    private TooToDoMain main;
+
+    /**
+     * Handles the register button, performs a check as to whether the passwords match
+     * and whether the username has already been created.
+     */
+    @FXML
+    public void handleRegisterButton() {
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+        String retypePassword = retypePasswordField.getText();
+        if (!password.equals(retypePassword)) {
+                incorrectRegister.setText("Passwords do not match.");
+                return;
+        }
+        if (main.getContainer().userIndex(username) > -1) {
+            incorrectRegister.setText("Username already exists.");
+            return;
+        }
+        User newUser = new User(username, password);
+        main.getContainer().addUser(newUser);
+        main.getContainer().setCurrentUser(newUser);
+        main.showToDoList();
+    }
+
+    /**
+     * Handles the cancel button by sending the user back to the login screen.
+     */
+    @FXML
+    public void handleCancelButton() {
+        main.showLogin();
+    }
+
+    @FXML
+    public void setMain(TooToDoMain main) {
+        this.main = main;
+    }
+
+}</code></pre>
+
+<h2>ToDoListController.java</h2>
+<p>Create a new file under the controller package titled ToDoListController. This java file will handle what happens on the home screen of the application.</p>
+
+<p>TableView is the actual table that you see. In the initialize() method, we have to do .setCellValueFactory. This will initialize the names of the columns. Copy and paste the following code:</p>
+<pre><code class="java">package TooToDoApp.Controller;
+
+import TooToDoApp.Model.ToDo;
+import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+public class ToDoListController {
+    @FXML
+    private TableView<ToDo> toDoTable;
+    @FXML
+    private TableColumn<ToDo, String> doneColumn;
+    @FXML
+    private TableColumn<ToDo, String> taskColumn;
+    @FXML
+    private TableColumn<ToDo, String> taskNotesColumn;
+
+    private TooToDoMain main;
+
+    @FXML
+    private void initialize() {
+        doneColumn.setCellValueFactory(new PropertyValueFactory<ToDo, String>("doneString"));
+        taskColumn.setCellValueFactory(new PropertyValueFactory<ToDo, String>("taskName"));
+        taskNotesColumn.setCellValueFactory(new PropertyValueFactory<ToDo, String>("taskNotes"));
+    }
+
+    /**
+     * Handles the create task button by sending the user to the create task screen
+     */
+    @FXML
+    public void handleCreateTask() {
+        main.showCreateTask();
+    }
+
+    @FXML
+    public void handleLogout() {
+        main.getContainer().setCurrentUser(null);
+        main.showLogin();
+    }
+
+    @FXML
+    public void handleCompleteTask() {
+        int selectedIndex = toDoTable.getSelectionModel().getSelectedIndex();
+        if (selectedIndex > -1) {
+            main.getContainer().getCurrentUser().getToDoList().get(selectedIndex).setComplete(true);
+            main.showToDoList();
+        }
+    }
+
+    @FXML
+    public void handleDeleteTask() {
+        int selectedIndex = toDoTable.getSelectionModel().getSelectedIndex();
+        if (selectedIndex > -1) {
+            main.getContainer().getCurrentUser().getToDoList().remove(selectedIndex);
+        }
+    }
+
+    public void setMain(TooToDoMain main) {
+        this.main = main;
+
+        toDoTable.setItems(main.getContainer().getCurrentUser().getToDoList());
+    }
+}
+</code></pre>
+
+<h2>CreateTaskController.java</h2>
+<p>Create a new file called CreateTaskController under the Controller package folder. This java class will control what happens when the user creates a new task.</p>
+
+<p>Copy and paste the following code:</p>
+<pre><code class="java">package TooToDoApp.Controller;
+
+import TooToDoApp.Model.ToDo;
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
+
+public class CreateTaskController {
+    @FXML
+    TextField taskNameField;
+    @FXML
+    TextField taskNotesField;
+
+    TooToDoMain main;
+
+    public void setMain(TooToDoMain main) {
+        this.main = main;
+    }
+
+    @FXML
+    public void handleCreateTask() {
+        String taskName = taskNameField.getText();
+        String taskNotes = taskNotesField.getText();
+        main.getContainer().getCurrentUser().addTask(new ToDo(taskName, taskNotes));
+        main.showToDoList();
+    }
+
+    @FXML
+    public void handleCancel() {
+        main.showToDoList();
+    }
+}
+</code></pre>
+
+<h2>TooToDoMain.java</h2>
+<p>
+Last but not least, let's set up a new Java file called TooToDoMain under the Controller folder. This file will control which views should appear on the user’s screen. 
+The first method start() controls which view appears when the application is ran for the first time. The FXMLLoader gets the login.fxml file. 
+At the top of the file, we set a Stage object named primaryStage. 
+Stage in JavaFX is the top level container for all content. Scene is the container for all content in a scene graph which is a data structure. The Scene is passed to the primary stage to show the view. 
+The other methods work the same way start() works. Each call a fxml file and set a Scene. 
+</p>
+<p>
+Copy and paste the following code:</p>
+<pre><code class="java">package TooToDoApp.Controller;
+
+import TooToDoApp.Model.Container;
+import javafx.application.Application;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
+public class TooToDoMain extends Application {
+
+    private Stage primaryStage;
+
+    private Container container = new Container();
+
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+        this.primaryStage.setTitle("Too To Do");
+
+        try {
+            FXMLLoader loader = new FXMLLoader(TooToDoMain.class.getResource("/TooToDoApp/View/Login.fxml"));
+            AnchorPane layout = (AnchorPane) loader.load();
+
+            LoginController controller = loader.getController();
+            controller.setMain(this);
+
+            Scene scene = new Scene(layout);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void showToDoList() {
+        try {
+            FXMLLoader loader = new FXMLLoader(TooToDoMain.class.getResource("/TooToDoApp/View/ToDoList.fxml"));
+            BorderPane layout = (BorderPane) loader.load();
+
+            ToDoListController controller = loader.getController();
+            controller.setMain(this);
+
+            Scene scene = new Scene(layout);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void showRegistration() {
+        try {
+            FXMLLoader loader = new FXMLLoader(TooToDoMain.class.getResource("/TooToDoApp/View/Registration.fxml"));
+            AnchorPane layout = (AnchorPane) loader.load();
+
+            RegistrationController controller = loader.getController();
+            controller.setMain(this);
+
+            Scene scene = new Scene(layout);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void showCreateTask() {
+        try {
+            FXMLLoader loader = new FXMLLoader(TooToDoMain.class.getResource("/TooToDoApp/View/CreateTask.fxml"));
+            AnchorPane layout = (AnchorPane) loader.load();
+
+            CreateTaskController controller = loader.getController();
+            controller.setMain(this);
+
+            Scene scene = new Scene(layout);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void showLogin() {
+        try {
+            FXMLLoader loader = new FXMLLoader(TooToDoMain.class.getResource("/TooToDoApp/View/Login.fxml"));
+            AnchorPane layout = (AnchorPane) loader.load();
+
+            LoginController controller = loader.getController();
+            controller.setMain(this);
+
+            Scene scene = new Scene(layout);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public Container getContainer() {return container;}
+}
+</code></pre>
                     </div>
                 </div>
             </div>
