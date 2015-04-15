@@ -90,10 +90,167 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1>Java FX Tutorial</h1>
-                        <!--<p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
-                        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p> -->
-                        <p>Hello! Welcome to the JavaFX tutorial for CS2340 students. In this tutorial we will go over installation of the IDE IntelliJ as well as the basics of JavaFX to help you all get started on your projects. This tutorial includes a java application that is built alongside the material in order to help solidify the topics. The tutorial is also built to allow for easy reference for any topic needed.</p>
-                        <p>The sample todo list that is referenced throughout the tutorial can be found on Github <a href ="https://github.com/xgalloway/TooToDo-master" target="_blank">here</a>.</p>
+                        <h2>ToDo.java </h2>
+
+<p>
+To begin we want to create model files that will manage the data and logic of our application. Create a new package and call it “Model”.
+</p>
+
+<p>
+(picture here)
+</p>
+
+<p>Now that we have created a new package, create a new Java file called ToDo. Copy-paste the following code in the file:</p>
+
+<pre><code class="java">package TooToDoApp.Model;
+
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+public class ToDo {
+    private String taskName;
+    private String taskNotes;
+    private String doneString;
+    public Boolean isComplete;
+
+    public ToDo() {
+        setTaskName("");
+        setTaskNotes("");
+        setComplete(false);
+    }
+
+    public ToDo(String taskName, String taskNotes) {
+        setTaskName(taskName);
+        setTaskNotes(taskNotes);
+        setComplete(false);
+    }
+
+    public void setTaskName(String taskName) { this.taskName = taskName;}
+
+    public void setTaskNotes(String taskNotes) { this.taskNotes = taskNotes; }
+
+    public void setComplete(boolean isComplete) {
+        this.isComplete = isComplete;
+        doneString = (isComplete) ? "Done!" : "No";
+    }
+
+    public Boolean getComplete() {
+        return isComplete;
+    }
+
+    public String getTaskNotes() {
+        return taskNotes;
+    }
+
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public String getDoneString() {
+        return doneString;
+    }
+}</code></pre>
+
+<p>
+This Java file is the central component to managing the to-do list data. Here we can set task names and notes and mark when it is complete. 
+</p>
+
+<h2>User.java </h2>
+
+<p>Next we want to manage data that the user enters. Create a new Java file and copy-paste this code into it:</p>
+
+<pre><code class="java">package TooToDoApp.Model;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+public class User {
+    private String UserName = "";
+    private String Password = "";
+    private ObservableList<ToDo> toDoList;
+
+    public User(String name, String pw) {
+        setUserName(name);
+        setPassword(pw);
+        toDoList = FXCollections.observableArrayList();
+    }
+
+    public void setPassword(String pw) {
+        Password = pw;
+    }
+
+    public void setUserName(String name) {
+        UserName = name;
+    }
+
+    public String getUserName() {
+        return UserName;
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public ObservableList<ToDo> getToDoList() {
+        return toDoList;
+    }
+
+    public void addTask(ToDo newTask) {
+        toDoList.add(newTask);
+    }
+}</code></pre>
+<p>Here we are allowed to manipulate data such as the username and password and the user specific to-do lists.</p>
+
+<h2>Container.java</h2>
+<p>What happens if we have multiple user accounts? How do we manage that? The answer is simple. We need a Java file in the model package that can contain all the different accounts in a list of some sort. Create a new Java file and copy-paste the following code:</p>
+
+<pre><code class="java">package TooToDoApp.Model;
+
+import java.util.ArrayList;
+
+public class Container {
+    private ArrayList<User> users = new ArrayList<User>();
+    private User currentUser;
+
+    public Container() {
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public ArrayList<User> getUsers() {
+        return users;
+    }
+
+    public void addUser(User newUser) {
+        users.add(newUser);
+    }
+
+    public int userIndex(String userName) {
+        if (users != null) {
+            for (int i = 0; i < users.size(); i++) {
+                if (userName.equalsIgnoreCase(users.get(i).getUserName())) {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
+    public boolean passwordMatch(int index, String password) {
+        return users.get(index).getPassword().equals(password);
+    }
+}
+</code></pre>
+
+<p>This Container.java allows us to retrieve user accounts and establish a match for user passwords.</p>
                     </div>
                 </div>
             </div>
