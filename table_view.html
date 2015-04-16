@@ -78,11 +78,66 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1>Java FX Tutorial</h1>
+                        <h1>Table Views</h1>
                         <!--<p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
                         <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p> -->
-                        <p>Hello! Welcome to the JavaFX tutorial for CS2340 students. In this tutorial we will go over installation of the IDE IntelliJ as well as the basics of JavaFX to help you all get started on your projects. This tutorial includes a java application that is built alongside the material in order to help solidify the topics. The tutorial is also built to allow for easy reference for any topic needed.</p>
-                        <p>The sample todo list that is referenced throughout the tutorial can be found on Github <a href ="https://github.com/xgalloway/TooToDo-master" target="_blank">here</a>.</p>
+                        <p>We will now learn how to make it so that our program populates the table view on the to do list page.</p>
+                        <h2>Initialize()</h2>
+                        <p>Each time a page is called, the controller will execute an <b><i>initialize()</i></b> method.  This method has following header format.</p>
+<pre><code class="java">    @FXML
+    private void initialize() {
+        //What needs to be carried out when a page is called.
+    }
+</code></pre>
+<p><b>1.</b> We will create an initialize function for the to do list page which will create the content for the table view.  In order to do so place an initialize() method in the ToDoListController class.</p>
+<p><b>2.</b> This function is going to need to know the table it is going to update as well as the corresponding columns.  Remember when we gave the table and columns fx:ids?  Place the following attributes at the top of the ToDoListController class.</p>
+<pre><code class="java">    @FXML
+    private TableView<ToDo> toDoTable;
+    @FXML
+    private TableColumn<ToDo, String> doneColumn;
+    @FXML
+    private TableColumn<ToDo, String> taskColumn;
+    @FXML
+    private TableColumn<ToDo, String> taskNotesColumn;
+</code></pre>
+<p> <b>NOTE:</b> Look at the TableView declaration.  <b><i>TableView&lt x &gt</i></b> where <i>x</i> is the type of objects that are contained within the tableview, so for this declaration x=ToDo.  Now look at the TableColumn's declaration.  <i><b>TableColumn &lt y, z &gt </i></b>, <i>y</i> is the TableView's generic type, which for this tableview is <i>ToDo</i>.  <i>z</i> is the type of content that will be held in the column which in this case will be a <i>String</i>.</p>
+<p><b>3.</b> Now we need the initialize method to actually do something with these fx:ids.  For this, let us take a look at the table column API.  Specifically look at the method setCellValueFactory().  This method is a setter that provides <b>TableColumn.CellDataFeatures</b> which is a wrapper class that holds all the information required by the table column to fill it.  This sounds like exactly what we need.  Place 3 method calls for all 3 columns to setCellValueFactory().</p>
+<pre><code class="java">    @FXML
+    private void initialize() {
+        doneColumn.setCellValueFactory();
+        taskColumn.setCellValueFactory();
+        taskNotesColumn.setCellValueFactory();
+    }
+</code></pre>
+<p><b>4.</b> Now, what input do we provide these functions calls to successfully fill the table?  According to the JavaFX API there are two ways, we can provide a callback or a <b>PropertyValueFactory</b>.  We will be using a PropertyValueFactory class.  This is used for its relative simplicity.  Look below to see the implementation.</p>
+<pre><code class="java">    private void initialize() {
+        doneColumn.setCellValueFactory(new PropertyValueFactory&ltToDo, String&gt("doneString"));
+        taskColumn.setCellValueFactory(new PropertyValueFactory&ltToDo, String&gt("taskName"));
+        taskNotesColumn.setCellValueFactory(new PropertyValueFactory&ltToDo, String&gt("taskNotes"));
+    }
+</code></pre>
+<p><b>NOTE:</b>Let us explain some of the parameters of <i>PropertyValueFactory&ltx, y&gt(z)</i>.  Similar to the table column's values, <i>x</i> is the TableView's generic type, and y is the type of class that will be held in the cells. <i>z</i> is the property that will be placed inside the collumn.</p>
+<p> Congratulations!  You've completed the method that will populate out tableview.  Try out the new application.  Just to make sure, your initialize function and new attributes should resemble the code shown below.</p>
+<pre><code class="java">public class ToDoListController {
+    @FXML
+    private TableView<ToDo> toDoTable;
+    @FXML
+    private TableColumn<ToDo, String> doneColumn;
+    @FXML
+    private TableColumn<ToDo, String> taskColumn;
+    @FXML
+    private TableColumn<ToDo, String> taskNotesColumn;
+
+    private TooToDoMain main;
+
+    @FXML
+    private void initialize() {
+        doneColumn.setCellValueFactory(new PropertyValueFactory<ToDo, String>("doneString"));
+        taskColumn.setCellValueFactory(new PropertyValueFactory<ToDo, String>("taskName"));
+        taskNotesColumn.setCellValueFactory(new PropertyValueFactory<ToDo, String>("taskNotes"));
+    }
+    //rest of file
+</code></pre>
                     </div>
                 </div>
             </div>

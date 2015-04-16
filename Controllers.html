@@ -224,7 +224,7 @@ public class RegistrationController {
 <h2>ToDoListController.java</h2>
 <p>Create a new file under the controller package titled ToDoListController. This java file will handle what happens on the home screen of the application.</p>
 
-<p>TableView is the actual table that you see. In the initialize() method, we have to do .setCellValueFactory. This will initialize the names of the columns. Copy and paste the following code:</p>
+<p>Copy and paste the following code:</p>
 <pre><code class="java">package TooToDoApp.Controller;
 
 import TooToDoApp.Model.ToDo;
@@ -234,23 +234,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ToDoListController {
-    @FXML
-    private TableView<ToDo> toDoTable;
-    @FXML
-    private TableColumn<ToDo, String> doneColumn;
-    @FXML
-    private TableColumn<ToDo, String> taskColumn;
-    @FXML
-    private TableColumn<ToDo, String> taskNotesColumn;
-
     private TooToDoMain main;
-
-    @FXML
-    private void initialize() {
-        doneColumn.setCellValueFactory(new PropertyValueFactory<ToDo, String>("doneString"));
-        taskColumn.setCellValueFactory(new PropertyValueFactory<ToDo, String>("taskName"));
-        taskNotesColumn.setCellValueFactory(new PropertyValueFactory<ToDo, String>("taskNotes"));
-    }
 
     /**
      * Handles the create task button by sending the user to the create task screen
