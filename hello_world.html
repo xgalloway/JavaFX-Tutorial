@@ -83,20 +83,21 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1>Hello World</h1>
-                        <!--<p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
-                        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p> -->
-                        <p>To begin creating a Hello World project in JavaFX, first click "Create New Project" in the "Welcome to IntelliJ IDEA" page as seen below. If something is already open, from the File menu, choose "New Project". </p>
+                        <p>This page shows how to create a sample Hello World application, as is done by most programmers when trying to learn how to use a new language or tool.</p>
+                        <h2>Project Creation/Setup</h2>
+                        <p><b>1.</b> To begin creating a Hello World project in JavaFX, first click "Create New Project" in the "Welcome to IntelliJ IDEA" page as seen below. If something is already open, from the File menu, choose "New Project". </p>
                         <img src="images/hello_world_new_project.png" alt="IntelliJ new project page">
 
-                        <p>Next select "JavaFX" from the side panel, and "JavaFX Application" on the right side. Make sure there is a Project SDK selected, which should be the one specified when installing IntelliJ. If your project requires a different SDK, select it from the dropdown menu if it is already specified or else click "new", and navigate to the downloaded SDK.</p>
+                        <p><b>2.</b> Next select "JavaFX" from the side panel, and "JavaFX Application" on the right side. Make sure there is a Project SDK selected, which should be the one specified when installing IntelliJ. If your project requires a different SDK, select it from the dropdown menu if it is already specified or else click "new", and navigate to the downloaded SDK.</p>
                         <img src="images/hello_world_new_project_javafx.png" alt="IntelliJ new project page">
 
                         <p></p>
-                        <p>Next, specify a project name and location, and click "Next".</p>
+                        <p><b>3.</b> Next, specify a project name and location, and click "Next".</p>
                         <img src="images/hello_world_new_project_name.png" alt="IntelliJ new project page">
 
                         <p></p>
-                        <p>As you can see, the project is created with controller.java, Main.java, and sample.fxml. Open Main.java and the following code should be automatically generated. </p>
+                        <p><b>4.</b> As you can see, the project is created with controller.java, Main.java, and sample.fxml. Open Main.java and the following code should be automatically generated. </p>
+                        <h2>Modify Default Code</h2>
 
 <pre><code class="java">package sample;
 
@@ -123,7 +124,7 @@ public class Main extends Application {
 }
 </code></pre>
 
-                        <p>In the start() method, delete the 'Parent = root..' line, and add the following code below at the beginning of the method to create a button.</p>
+                        <p><b>1.</b> In the start() method of Main.java, delete the 'Parent = root..' line, and add the following code below at the beginning of the method to create a button.</p>
 
 <pre><code class="java">Button btn = new Button();
 btn.setText("Say 'Hello World'");
@@ -138,11 +139,11 @@ btn.setOnAction(new EventHandler<ActionEvent>() {
 StackPane stack = new StackPane();
 stack.getChildren().add(btn);</code></pre>
 
-                        <p>Some classes were probably not imported, so Button ActionEvent, and StackPane are probably red. Hover over them with your mouse and you should be able to automatically have IntelliJ import for you. Choose javafx... when prompted to choose between two different pre-existing classes. </p>
+                        <p><b>2.</b> Some classes were probably not imported, so Button ActionEvent, and StackPane are probably red. Hover over them with your mouse and you should be able to automatically have IntelliJ import for you. Choose javafx... when prompted to choose between two different pre-existing classes. </p>
                         <img src="images/hello_world_import_button.png" alt="Import Button">
 
                         <p></p>
-                        <p>Lastly, at the bottom of the method instead of setting the previous 'root' we want to set the new Stack we created as seen below.</p>
+                        <p><b>3.</b> Lastly, at the bottom of the method instead of setting the previous 'root' we want to set the new Stack we created as seen below.</p>
 
 <pre><code class="java">primaryStage.setScene(new Scene(stack, 300, 275));</code></pre>
 
@@ -173,12 +174,12 @@ public void start(Stage primaryStage) throws Exception{
 }</code></pre>
 
                     <p></p>
-                    <p>In the top right hand corner of IntelliJ click the green "play" button to run the application.</p>   
+                    <p><b>4.</b> In the top right hand corner of IntelliJ click the green "play" button to run the application.</p>   
 
                     <img src="images/hello_world_run.png" alt="Import Button">
 
                     <p></p>
-                    <p>It's important to note that this hello world example doesn't use FXML, which is important. For more information about basic FXML, check out the link <a href="http://docs.oracle.com/javafx/2/get_started/form.htm#BABDDGEE" target="_blank">here</a></p>
+                    <p>It's important to note that this hello world example doesn't make use of FXML, which is important. For more information about basic FXML, check out the link <a href="http://docs.oracle.com/javafx/2/get_started/form.htm#BABDDGEE" target="_blank">here</a>. To find out more about JavaFX be sure to check out <a href="scene_builder.html">Part 1: Scene Builder</a> where you can find out how to create a simple JavaFX  application completely from start to finish.</p>
 
 
                     </div>
