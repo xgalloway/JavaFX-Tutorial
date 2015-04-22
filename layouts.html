@@ -25,6 +25,10 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <link rel="stylesheet" href="highlight/styles/default.css">
+    <script src="highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
 </head>
 
 <body>
@@ -79,14 +83,49 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1>Layouts</h1>
-                        <!--<p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
-                        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p> -->
+                        There are many different layouts to choose from when developing your JavaFX application. Listed below are a
+                        few.  Don't be afraid to play around with layouts yourself in Scene Builder.
+                        <h2>AnchorPane </h2>
+                        <p>The AnchorPane 
+                        layout pane enables you to anchor nodes to the top, bottom, left side, right side, or center 
+                        of the pane. As the window is resized, the nodes maintain their position relative to their 
+                        anchor point. </p>
                         
+                        <h2>BorderPane </h2>
+                        <p>BorderPane lays out children in top, left, right, bottom, and center positions. The top and 
+                        bottom children will be resized to their preferred heights and extend the width of the borderpane. 
+                        The left and right children will be resized to their preferred widths and extend the length between 
+                        the top and bottom nodes. And the center node will be resized to fill the available space in the middle. 
+                        Any of the positions may be null. Here is an example of the BorderPane layout: </p>
+<img src="images/borderpane.png" alt="BorderPane Image">
+
+                                      
+                        <h2>FlowPane </h2>
+                        <p>The nodes within a FlowPane layout pane are laid out consecutively and wrap at the boundary set for the 
+                        pane. Nodes can flow vertically (in columns) or horizontally (in rows). A vertical FlowPane wraps at the 
+                        height boundary for the pane. A horizontal FlowPane wraps at the width boundary for the pane. Here is an 
+                        example of the FlowPlane layout: </p>
+                        <img src="images/flowpane.png" alt="FlowPane Image">
+<p>Notice how the the buttons and separators laid out on the plane are consecutive and wrap once the end of the window is reached.</p>
+                        
+                        <h2>GridPane </h2>
+                        <p>The GridPane layout pane enables you to create a flexible grid of roturws and columns in which to lay out 
+                        nodes. Nodes can be placed in any cell in the grid and can span cells as needed. A grid pane is useful for 
+                        creating forms or any layout that is organized in rows and columns. Here is an example of a 2x3 GridPane layout: </p>
+                        <img src="images/gridpane.png" alt="GridPane Image">
+
+                        
+                        <h2>StackPane </h2>
+                        <p>The StackPane layout pane places all of the nodes within a single stack with each new node added on top of 
+                        the previous node. This layout model provides an easy way to overlay text on a shape or image or to overlap 
+                        common shapes to create a complex shape. </p>               
+
                     </div>
                 </div>
             </div>
         </div>
         <!-- /#page-content-wrapper -->
+
 
     </div>
     <!-- /#wrapper -->
@@ -108,3 +147,5 @@
 </body>
 
 </html>
+
+
