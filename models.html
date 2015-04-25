@@ -82,19 +82,19 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1>Java FX Tutorial</h1>
-                        <h2>ToDo.java </h2>
-
+                        <h1>Models</h1>
+    <p>  We are following the Model-View-Controller architectural pattern.  In this fashion we will build the model classes.
+        Since this is a tutorial that is focused on JavaFX, the code will be explained and given to you.</p>
 <p>
-To begin we want to create model files that will manage the data and logic of our application. Create a new package and call it “Model”.
+The models are meant to manage the data and logic of our application. Create a new package and call it “Model”.
 </p>
 
 <p>
-<img src="images/controller_new-package.png" alt="Controller New Package">
+<img src="images/ModelNewPackage.png" alt="Model New Package">
 </p>
 
-
-<p>Now that we have created a new package, create a new Java file called ToDo. Copy-paste the following code in the file:</p>
+<h2>ToDo.java </h2>
+<p>Now that we have created a new package, create a new Java class called ToDo. This Java file is the central component to managing the to-do list data. Here we can set task names and notes and mark when it is complete. One thing to note is that the String and Boolean objects are actually <b>simple properties</b> that are readable and writeable when the package javafx.beans.property is imported. Each of the classes in this package provide full implementation of a Property wrapping its respective object. Read and work through the following code. <i>doneString</i> is a string that will be displayed in the tableview.  When the boolean setter method is used it will change the value of the string.</p>
 
 <pre><code class="java">package TooToDoApp.Model;
 
@@ -148,12 +148,12 @@ public class ToDo {
 }</code></pre>
 
 <p>
-This Java file is the central component to managing the to-do list data. Here we can set task names and notes and mark when it is complete. One thing to note is that the String and Boolean objects are actually properties that are readable and writeable when the package javafx.beans.property is imported. Each of the classes in this package provide full implementation of a Property wrapping its respective object. 
+
 </p>
 
 <h2>User.java </h2>
 
-<p>Next we want to manage data that the user enters. Create a new Java file and copy-paste this code into it:</p>
+<p>Next we want to manage data that the user enters. We would like to maintain data such as the username and password and the user specific to-do lists. The <b>ObservableList</b> imported from javafx.collections is the list used to display the tasks and notes. An ObservableList allows programmers to create listeners to track changes of the list when they occur. Work through the following code and place it in a new file named User.java.  Most of the functions are just getters and setters.</p>
 
 <pre><code class="java">package TooToDoApp.Model;
 
@@ -198,7 +198,7 @@ public class User {
 <p>Here we are allowed to manipulate data such as the username and password and the user specific to-do lists. The ObservableList imported from javafx.collections is the list used to display the tasks and notes. An ObservableList allows listeners (you) to track changes of the list when they occur. In this case you can track what is added, modified, or deleted from the list.</p>
 
 <h2>Container.java</h2>
-<p>What happens if we have multiple user accounts? How do we manage that? The answer is simple. We need a Java file in the model package that can contain all the different accounts in a list of some sort. Create a new Java file and copy-paste the following code:</p>
+<p>What happens if we have multiple user accounts? How do we manage that? The answer is simple. We need a Java file in the model package that can contain all the different accounts in a list of some sort. We will now create a container class.  We need an array list of users and a current user attribute.  This class also has a function that will return the index of previously made accounts within the list given a username.  Using this index, we can use <i>passwordMatch()</i> to check a password.  Create a new Java file named Container.java and work through the following code:</p>
 
 <pre><code class="java">package TooToDoApp.Model;
 
@@ -244,7 +244,7 @@ public class Container {
 }
 </code></pre>
 
-<p>This Container.java allows us to retrieve user accounts and establish a match for user passwords.</p>
+<p>Congratulations! Next, we will build the controller classes of our application.</p>
                     </div>
                 </div>
             </div>
