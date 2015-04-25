@@ -90,8 +90,9 @@ To begin we want to create model files that will manage the data and logic of ou
 </p>
 
 <p>
-(picture here)
+<img src="images/controller_new-package.png" alt="Controller New Package">
 </p>
+
 
 <p>Now that we have created a new package, create a new Java file called ToDo. Copy-paste the following code in the file:</p>
 
@@ -147,7 +148,7 @@ public class ToDo {
 }</code></pre>
 
 <p>
-This Java file is the central component to managing the to-do list data. Here we can set task names and notes and mark when it is complete. 
+This Java file is the central component to managing the to-do list data. Here we can set task names and notes and mark when it is complete. One thing to note is that the String and Boolean objects are actually properties that are readable and writeable when the package javafx.beans.property is imported. Each of the classes in this package provide full implementation of a Property wrapping its respective object. 
 </p>
 
 <h2>User.java </h2>
@@ -194,7 +195,7 @@ public class User {
         toDoList.add(newTask);
     }
 }</code></pre>
-<p>Here we are allowed to manipulate data such as the username and password and the user specific to-do lists.</p>
+<p>Here we are allowed to manipulate data such as the username and password and the user specific to-do lists. The ObservableList imported from javafx.collections is the list used to display the tasks and notes. An ObservableList allows listeners (you) to track changes of the list when they occur. In this case you can track what is added, modified, or deleted from the list.</p>
 
 <h2>Container.java</h2>
 <p>What happens if we have multiple user accounts? How do we manage that? The answer is simple. We need a Java file in the model package that can contain all the different accounts in a list of some sort. Create a new Java file and copy-paste the following code:</p>
