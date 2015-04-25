@@ -61,6 +61,9 @@
                     <a href="table_view.html">Part 4: Table Views</a>
                 </li>
                 <li>
+                    <a href="css_style_sheets.html">Part 5: CSS</a>
+                </li>
+                <li>
                     <a href="images.html">Images</a>
                 </li>
                 <li>
@@ -107,10 +110,10 @@
                         <img src="images/SceneBuilder/loginLayoutSceneBuilder.png" alt="Login Layout">
                         <p> Now...let's build it. We need to decide on a main layout structure for the login page of our application.  We will use an <b>AnchorPane</b>.  Anchorpanes allow for the positioning of child nodes within the pane with respect to the edges.  This also seems to be the default layout when creating new fxml files with Scene Builder.</p>
                         <p><b>1.</b> If the anchorpane is not the current container in the workspace go to <i>File>New With Root Container>Anchor Pane</i> and call this new file "Login.fxml".  </p>
-                        <p><b>2.</b> Change the <b>pref width</b> and <b>pref height</b> in the inspector property sto 800 and 600 respectively.  The pref width and pref height determine the default size of the window when the application is opened.</p>
+                        <p><b>2.</b> Change the <b>pref width</b> and <b>pref height</b> in the inspector's layout properties to 800 and 600 respectively.  The pref width and pref height determine the default size of the window when the application is opened.</p>
                         <p><b>3.</b> Under the container section in the library find the <b>VBox</b>.  Items placed within a VBox will stack vertically. The <b>HBox</b> does the same, just horizontally.  Drag a VBox to the anchor pane slowly, you will see red lines show up around the edges and the centers of the sides.  When an item is placed on a vertical red line the layout property <b>layout x</b> is set to that red line.  When an item is placed with a horizontal line, the <b>layout y</b> property is set.  For this VBox we would like to place it in the center of the anchor pane, two perpendicular red lines will show up when you're close as shown below.</p>
                         <img src="images/SceneBuilder/loginCenterVBox.png" alt="VBox Center">
-                        <p><b>4.</b> Change the <b>spacing</b> property under the layout tab in the inspector to 10. This will space the items placed within this container to have a spacing of 10 between them. Which will help make things look less crammed. </p>
+                        <p><b>4.</b> Change the vbox's <b>spacing</b> property under the layout tab in the inspector to 10. This will space the items placed within this container to have a spacing of 10 between them. Which will help make things look less crammed. </p>
                         <p><b>5.</b>Now, change the constraints of the VBox to the anchor pane to be centered and allow room for the containers we will add.  To do this, change the <b>constraints</b> under the layout properties in the inspector as shown.</p>
                         <img src="images/SceneBuilder/vboxAnchorPaneConstraints.png" alt="constraints">
                         <p><b>6.</b> Change the pref width and pref height of the VBox to USE_COMPUTED_SIZE, this will make the VBox fit snug around the items within it. </p>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>IntelliJ Tutorial</title>
+    <link rel="shortcut icon" type="image/png" href="images/intellij_icon.png" />
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="highlight/styles/default.css">
+    <script src="highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="index.html">
+                        Java FX Tutorial
+                    </a>
+                </li>
+                <li>
+                    <a href="installing_intellij.html">Installing IntelliJ</a>
+                </li>
+                <li>
+                    <a href="hello_world.html">Hello World</a>
+                </li>
+                <li>
+                    <a href="debugging_intellij.html">Debugging with Intellij</a>
+                </li>
+                <li>
+                    <a href="scene_builder.html">Part 1: Scene Builder</a>
+                </li>
+                <li>
+                    <a href="models.html">Part 2: Models</a>
+                </li>
+                <li>
+                    <a href="controllers.html">Part 3: Controllers</a>
+                </li>
+                <li>
+                    <a href="table_view.html">Part 4: Table Views</a>
+                </li>
+                <li>
+                    <a href="css_style_sheets.html">Part 5: CSS</a>
+                </li>
+                <li>
+                    <a href="images.html">Images</a>
+                </li>
+                <li>
+                    <a href="layouts.html">Layouts</a>
+                </li>
+                <li>
+                    <a href="other.html">Other Information</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>CSS</h1>
+                        <p> This page will not make you a master at CSS, but it will hopefully give you a general idea of their purpose and use.
+                        <h2>What are they?</h2>
+                        <p>CSS stands for cascading style sheets, these are used for describing and personalizing documents such as FXMLS!</p>
+                        <h2>What do they look like?</h2>
+                        <p>Below we show the code for our application's css.</p> 
+                        <pre><code class="css">.root {
+    -fx-background-color: #87cefa;
+}
+
+.label {
+    -fx-font-size: 12;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.button {
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 2, 0.0 , 0 , 1 );
+}
+</code></pre>
+<h2>Notice anything?</h2>
+<p>You may notice based on indentation, that each section is headed with familiar objects.  These are <b>class selectors</b> and are always preceded by a dot (.).  This tells us which class the properties described within the curly braces go to. <i>.root</i> makes the properties shown apply to the root node of a scene.  Create a new folder with our view, model, and controller folder.  Call this folder CSS and create a text document within the folder.  On the first save of this document, save it as "styleSheet.css" as shown below.</p>
+<img src="images/CSS/CSSFolder.png" alt="CSS Folder">
+<h3>Background Color</h3>
+<p>The properties described should seem pretty self explanatory but just in case they don't we will go over them.  For any of the color properties feel free to pick whichever colors you prefer! In the code below we set the background color of the root node to a nice blue color in hexidecimal.  (You can get the hexidecimal values for most colors <a href ="http://www.w3schools.com/tags/ref_colorpicker.asp">here</a>)</p>
+<pre><code class="css">.root {
+    -fx-background-color: #87cefa;
+}
+</code></pre> 
+<p>This will apply to ALL of our views.  Note the structure, property name followed by a colon followed by a value then ended with a semicolon.</p>
+<h3>Label Design</h3>
+<p>Maybe we want to make sure all label font size is 12, bold, and white.  We do this by changing the -fx-font-size, -fx-font-weight, and -fx-text-fill.</p>
+<pre><code class="css">
+.label {
+    -fx-font-size: 12;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+</code></pre>
+<p> Notice anything interesting?  Well, we used a name of a color as oppose to a hexidecimal value.  This is OKAY!  CSS actually supports 17 keywords for color.  These keywords are shown <a href ="http://www.w3.org/TR/CSS21/syndata.html#value-def-color">here</a>.</p>
+<h3>Button Design</h3>
+<p> Let's add a nice effect to our buttons say, a shadow that appears when the button is selected.  This can be done with the following code. </p>
+<pre><code class="css">
+.button {
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 2, 0.0 , 0 , 1 );
+}
+</code></pre>
+<p>dropshadow() takes in 6 values.  A blur type, color, and 4 numbers.  The color is simply the color of the shadow.  The first number determines the radius of the shadow.  The second number is the spread of the shadow and the last two are the x and y offset respectively.  RGBA() takes in four numbers the define the color.  The first number assigns the <b>R</b>ed value.  The second value <b>G</b>reen.  The third value <b>B</b>lue. And last but not least, <b>A</b>lpha.  This is the opacity and should be between 0 (transparent) and 1 (opaque).  The color values should be between 0 and 255.</p>
+<h2>Using Our CSS</h2>
+<p>We simply need to provide the fxml files with a path to the css. Open each fxml and give the root pane's stylesheets property the following value.</p>
+<img src="images/CSS/StyleSheetPath.png" alt="CSS Path">
+<p>Our application should now have a much more original look.  The JavaFX CSS Reference Guide is massive but informative and can be found <a href ="https://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html">here</a>. </p>
+<p><b>Congratulations, you're done with the application!</b></p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+</body>
+
+</html>
