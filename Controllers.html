@@ -151,14 +151,24 @@ import javafx.scene.control.Label;
 }</code></pre>
 
 <p>
-The @FXML annotations are important because the properties are private. Without the @FXML annotations, we cannot reference them to the corresponding FXML files. 
+The @FXML annotations are important because the properties are private. Without the @FXML annotations, we cannot reference them to the corresponding FXML files. These fxml ID's are the names of the fx:id fields for the the text fields. For example, look at the image below. The LoginController.java file loginTextField corresponds to the following fx:id in Login.fxml (see images below). 
 </p>
+<p>
+<img src="images/Controller_fxmlid_1.png" alt="Fxml ID">
+</p>
+
+<p>
+<img src="images/Controller_fxmlid_2.png" alt="Fxml ID">
+</p>
+
 <p>
 The method handleLoginButton is the same name that we used for the onAction tag in the login.fxml file. 
 
-When the button is clicked, the controller will tell it what to do based on whether the login credentials are correct or not. Note that this method also has the @FXML annotation because it is referenced in the Login.fxml file. 
+When the button is clicked, the controller will tell it what to do based on whether the login credentials are correct or not. Note that this method also has the @FXML annotation because it is referenced in the Login.fxml file. If the code goes through the else if, it calls main.showToDoList(). showToDoList() refers to the method in the TooToDoMain.java file. 
 </p>
-
+<p>
+The method handleRegisterButton handles what happens when the user clicks the Register button. In this bit, the code is simple. It simply calls showRegistration() which refers to the TooToDoMain.java file. We will explain later in detail how TooToDoMain.java works. 
+</p>
 <h2>RegistrationController.java </h2>
 
 <p>Now, let's create a controller java file that will control what happens when the register button is clicked. Create a new file under the package Controller and let's call it RegistrationController. Copy and paste the following code in the file:</p>
@@ -221,8 +231,16 @@ public class RegistrationController {
 
 }</code></pre>
 
+<p>
+Similar to the LoginController.java file, towards the beginning of the code you will see the @FXML annotations. However, this file corresponds to Registration.fxml. 
+</p>
+
+<p>
+The handleRegisterButton() method handles what happens when the Register button is clicked. This method retrives the text entered in the login, or the username in this case, and password text fields. Instead of passing on the credentials, we have to create a User object first with the user entered username and password. Then, we add this new User object to the ArrayList of user's that is held by Container in Container.java. Finallly, we set this new User object as the current user and then calling main.showToDoList.java which calls the showToDoList() method in TooToDoMain.java. 
+</p>
+
 <h2>ToDoListController.java</h2>
-<p>Create a new file under the controller package titled ToDoListController. This java file will handle what happens on the home screen of the application.</p>
+<p>Create a new file under the controller package titled ToDoListController. This java file will handle what happens on the main screen, not the login or register screen, of the application.</p>
 
 <p>Copy and paste the following code:</p>
 <pre><code class="java">package TooToDoApp.Controller;
@@ -275,6 +293,15 @@ public class ToDoListController {
 }
 </code></pre>
 
+<p>
+In the code above, we import TableColumn, TableView, and PropertyValueFactory. All three of these are still considered "controls." A TableView is made up of a number of TableColumn instances. Each TableColumn is responsible for displaying the contents of all the cell's in a column. The PropertyValueFactory is how we set the contents of a specific cell. 
+</p>
+
+<p>
+The first four methods control what will happen if the user clicks a certain button on the screen. For example, if the "Create Task" button is clicked, it will call the createTask() method in TooToDoMain.java and bring up that view. The last method, setMain(TooToDoMain main), gets the current user and the toDoList associated with that specific user and displays the contents on the current screen. 
+</p>
+
+
 <h2>CreateTaskController.java</h2>
 <p>Create a new file called CreateTaskController under the Controller package folder. This java class will control what happens when the user creates a new task.</p>
 
@@ -315,9 +342,9 @@ public class CreateTaskController {
 <h2>TooToDoMain.java</h2>
 <p>
 Last but not least, let's set up a new Java file called TooToDoMain under the Controller folder. This file will control which views should appear on the user’s screen. 
-The first method start() controls which view appears when the application is ran for the first time. The FXMLLoader gets the login.fxml file. 
+The first method start() controls which view appears when the application is ran for the first time. The FXMLLoader gets the Login.fxml and loads it to the screen. 
 At the top of the file, we set a Stage object named primaryStage. 
-Stage in JavaFX is the top level container for all content. Scene is the container for all content in a scene graph which is a data structure. The Scene is passed to the primary stage to show the view. 
+Stage in JavaFX 8 is the top level container for all content. Scene is the container for all content in a scene graph which is a data structure. The Scene is passed to the primary stage to show the view. 
 The other methods work the same way start() works. Each call a fxml file and set a Scene. 
 </p>
 <p>
