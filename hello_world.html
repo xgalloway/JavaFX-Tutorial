@@ -89,14 +89,14 @@
                         <p>This page shows how to create a sample Hello World application, as is done by most programmers when trying to learn how to use a new language or tool.</p>
                         <h2>Project Creation/Setup</h2>
                         <p><b>1.</b> To begin creating a Hello World project in JavaFX, first click "Create New Project" in the "Welcome to IntelliJ IDEA" page as seen below. If something is already open, from the File menu, choose "New Project". </p>
-                        <img src="images/hello_world_new_project.png" alt="IntelliJ new project page">
+                        <img src="images/HelloWorld/hello_world_new_project.png" alt="IntelliJ new project page">
 
                         <p><b>2.</b> Next select "JavaFX" from the side panel, and "JavaFX Application" on the right side. Make sure there is a Project SDK selected, which should be the one specified when installing IntelliJ. If your project requires a different SDK, select it from the dropdown menu if it is already specified or else click "new", and navigate to the downloaded SDK.</p>
-                        <img src="images/hello_world_new_project_javafx.png" alt="IntelliJ new project page">
+                        <img src="images/HelloWorld/hello_world_new_project_javafx.png" alt="IntelliJ new project page">
 
                         <p></p>
                         <p><b>3.</b> Next, specify a project name and location, and click "Next".</p>
-                        <img src="images/hello_world_new_project_name.png" alt="IntelliJ new project page">
+                        <img src="images/HelloWorld/hello_world_new_project_name.png" alt="IntelliJ new project page">
 
                         <p></p>
                         <p><b>4.</b> As you can see, the project is created with controller.java, Main.java, and sample.fxml. Open Main.java and the following code should be automatically generated. </p>
@@ -143,7 +143,7 @@ StackPane stack = new StackPane();
 stack.getChildren().add(btn);</code></pre>
 
                         <p><b>2.</b> Some classes were probably not imported, so Button ActionEvent, and StackPane are probably red. Hover over them with your mouse and you should be able to automatically have IntelliJ import for you. Choose javafx... when prompted to choose between two different pre-existing classes. </p>
-                        <img src="images/hello_world_import_button.png" alt="Import Button">
+                        <img src="images/HelloWorld/hello_world_import_button.png" alt="Import Button">
 
                         <p></p>
                         <p><b>3.</b> Lastly, at the bottom of the method instead of setting the previous 'root' we want to set the new Stack we created as seen below.</p>
@@ -179,7 +179,7 @@ public void start(Stage primaryStage) throws Exception{
                     <p></p>
                     <p><b>4.</b> In the top right hand corner of IntelliJ click the green "play" button to run the application.</p>   
 
-                    <img src="images/hello_world_run.png" alt="Import Button">
+                    <img src="images/HelloWorld/hello_world_run.png" alt="Import Button">
 
                     <p></p>
                     <p>It's important to note that this hello world example doesn't make use of FXML, which is important. For more information about basic FXML, check out the link <a href="http://docs.oracle.com/javafx/2/get_started/form.htm#BABDDGEE" target="_blank">here</a>. To find out more about JavaFX be sure to check out <a href="scene_builder.html">Part 1: Scene Builder</a> where you can find out how to create a simple JavaFX  application completely from start to finish.</p>

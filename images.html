@@ -91,12 +91,12 @@
                         <p>First, create a new project, or in your current project right click on the FXML file and click "Open in Scene Builder". For specific Scene Builder questions refer to the <a href="scene_builder.html">Scene Builder</a> section of the tutorial. </p>
                         <p>In the FXML file in Scene Builder, on the left side under "Controls" drag an ImageView into the Pane. Scene Builder allows you to easily resize and format the ImageView in the way you want. On the right side in the Inspector, you can choose the Image you want to load in the ImageView. Make sure the image is in your project directory (/project_name/src/sample/image.jpg), because some problems can occur when you load an image from elsewhere, including the image just not showing up at all. Below is an example of an ImageView in Scene Builder. </p>
 
-                        <img src="images/images_1.png" alt="Create ImageView">
+                        <img src="images/Images/images_1.png" alt="Create ImageView">
 
                         <p></p>
                         <p>Hard coding an image path is ok for static images that will never change, but it is good practice to do the setting in the controller class instead of in the FXML. On the bottom left "Controller" Tab in Scene Builder, choose the corresponding controller class as seen below. </p>
 
-                        <img src="images/images_2.png" alt="Select Controller">
+                        <img src="images/Images/images_2.png" alt="Select Controller">
 
                         <p></p>
                         <h2>Create ImageView in FXML</h2>
@@ -188,7 +188,7 @@ public class Controller {
 }
 </code></pre>
 						<p>With this reference to the ImageView, we can modify the image however we want. With the regular image: </p>
-						<img src="images/images_3.png" alt="Initial app">
+						<img src="images/Images/images_3.png" alt="Initial app">
 						<p></p>
 						<p>To use a different image in code, set the Image of the ImageView to something else. The Image object can take in a place in the current directory, or also an image online. </p>
 <pre><code class="java">public void setMain(Main main) {
@@ -197,7 +197,7 @@ public class Controller {
     imageView.setImage(image);
 }
 </code></pre>
-						<img src="images/images_4.png" alt="Internet image">
+						<img src="images/Images/images_4.png" alt="Internet image">
 						<p></p>
 						<p>Similarly, you can rotate the image by calling the .setRotate method:</p>
 <pre><code class="java">public void setMain(Main main) {
@@ -207,7 +207,7 @@ public class Controller {
     imageView.setRotate(90);
 }
 </code></pre>
-						<img src="images/images_5.png" alt="Rotated image">
+						<img src="images/Images/images_5.png" alt="Rotated image">
 						<p></p>
 						<p>Look at the Oracle documentation for more information about what can be done with <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/image/ImageView.html" target="_blank">ImageViews</a> or <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/image/Image.html" target="_blank">Images</a>. </p>
                     </div>
